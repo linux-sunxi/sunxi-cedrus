@@ -1,0 +1,1594 @@
+/*
+ * Rockchip VPU codec driver
+ *
+ * Copyright (C) 2015 Rockchip Electronics Co., Ltd.
+ *      Alpha Lin <alpha.lin@rock-chips.com>
+ *
+ * Copyright (C) 2016 Rockchip Electronics Co., Ltd.
+ *      Jung Zhao <jung.zhao@rock-chips.com>
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#ifndef ROCKCHIP_VP8D_REGS_H
+#define ROCKCHIP_VP8D_REGS_H
+
+enum VP8_REGS {
+	VDPU_REG_CONFIG_DEC_TIMEOUT_E,
+	VDPU_REG_CONFIG_DEC_CLK_GATE_E,
+	VDPU_REG_DEC_CTRL0_PIC_INTER_E,
+	VDPU_REG_CONFIG_DEC_STRENDIAN_E,
+	VDPU_REG_CONFIG_DEC_INSWAP32_E,
+	VDPU_REG_CONFIG_DEC_STRSWAP32_E,
+	VDPU_REG_CONFIG_DEC_OUTSWAP32_E,
+	VDPU_REG_CONFIG_DEC_IN_ENDIAN,
+	VDPU_REG_CONFIG_DEC_OUT_ENDIAN,
+	VDPU_REG_CONFIG_DEC_MAX_BURST,
+	VDPU_REG_DEC_CTRL0_DEC_MODE,
+	VDPU_REG_DEC_CTRL0_SKIP_MODE,
+	VDPU_REG_DEC_CTRL0_FILTERING_DIS,
+	VDPU_REG_DEC_PIC_MB_WIDTH,
+	VDPU_REG_DEC_PIC_MB_HEIGHT_P,
+	VDPU_REG_DEC_CTRL1_PIC_MB_W_EXT,
+	VDPU_REG_DEC_CTRL1_PIC_MB_H_EXT,
+	VDPU_REG_DEC_CTRL2_BOOLEAN_RANGE,
+	VDPU_REG_DEC_CTRL2_BOOLEAN_VALUE,
+	VDPU_REG_DEC_CTRL4_VC1_HEIGHT_EXT,
+	VDPU_REG_DEC_CTRL4_BILIN_MC_E,
+	VDPU_REG_REF_PIC_LF_LEVEL_0,
+	VDPU_REG_REF_PIC_LF_LEVEL_1,
+	VDPU_REG_REF_PIC_LF_LEVEL_2,
+	VDPU_REG_REF_PIC_LF_LEVEL_3,
+	VDPU_REG_REF_PIC_FILT_SHARPNESS,
+	VDPU_REG_REF_PIC_FILT_TYPE_E,
+	VDPU_REG_FILT_MB_ADJ_0,
+	VDPU_REG_FILT_MB_ADJ_1,
+	VDPU_REG_FILT_MB_ADJ_2,
+	VDPU_REG_FILT_MB_ADJ_3,
+	VDPU_REG_REF_PIC_ADJ_0,
+	VDPU_REG_REF_PIC_ADJ_1,
+	VDPU_REG_REF_PIC_ADJ_2,
+	VDPU_REG_REF_PIC_ADJ_3,
+	VDPU_REG_REF_PIC_QUANT_0,
+	VDPU_REG_REF_PIC_QUANT_1,
+	VDPU_REG_REF_PIC_QUANT_2,
+	VDPU_REG_REF_PIC_QUANT_3,
+	VDPU_REG_REF_PIC_QUANT_DELTA_0,
+	VDPU_REG_REF_PIC_QUANT_DELTA_1,
+	VDPU_REG_REF_PIC_QUANT_DELTA_2,
+	VDPU_REG_REF_PIC_QUANT_DELTA_3,
+	VDPU_REG_REF_PIC_QUANT_DELTA_4,
+	VDPU_REG_VP8_ADDR_CTRL_PART,
+	VDPU_REG_DEC_CTRL2_STRM1_START_BIT,
+	VDPU_REG_DEC_CTRL6_STREAM1_LEN,
+	VDPU_REG_DEC_CTRL6_COEFFS_PART_AM,
+	VDPU_REG_DEC_CTRL3_STREAM_LEN,
+	VDPU_REG_ADDR_STR,
+	VDPU_REG_VP8_DCT_BASE_0,
+	VDPU_REG_VP8_DCT_BASE_1,
+	VDPU_REG_VP8_DCT_BASE_2,
+	VDPU_REG_VP8_DCT_BASE_3,
+	VDPU_REG_VP8_DCT_BASE_4,
+	VDPU_REG_VP8_DCT_BASE_5,
+	VDPU_REG_VP8_DCT_BASE_6,
+	VDPU_REG_DEC_CTRL2_STRM_START_BIT,
+	VDPU_REG_DEC_CTRL4_DCT1_START_BIT,
+	VDPU_REG_DEC_CTRL4_DCT2_START_BIT,
+	VDPU_REG_DEC_CTRL7_DCT3_START_BIT,
+	VDPU_REG_DEC_CTRL7_DCT4_START_BIT,
+	VDPU_REG_DEC_CTRL7_DCT5_START_BIT,
+	VDPU_REG_DEC_CTRL7_DCT6_START_BIT,
+	VDPU_REG_DEC_CTRL7_DCT7_START_BIT,
+	VDPU_REG_PRED_FLT_NONE_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_0_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_0_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_0_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_0_3,
+	VDPU_REG_PRED_FLT_NONE_1,
+	VDPU_REG_PRED_FLT_NONE_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_1_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_1_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_1_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_1_3,
+	VDPU_REG_PRED_FLT_NONE_3,
+	VDPU_REG_BD_REF_PIC_PRED_TAP_2_M1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_2_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_2_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_2_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_2_3,
+	VDPU_REG_BD_REF_PIC_PRED_TAP_2_4,
+	VDPU_REG_PRED_FLT_NONE_4,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_3_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_3_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_3_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_3_3,
+	VDPU_REG_PRED_FLT_NONE_5,
+	VDPU_REG_BD_REF_PIC_PRED_TAP_4_M1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_4_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_4_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_4_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_4_3,
+	VDPU_REG_BD_REF_PIC_PRED_TAP_4_4,
+	VDPU_REG_PRED_FLT_NONE_6,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_5_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_5_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_5_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_5_3,
+	VDPU_REG_PRED_FLT_NONE_7,
+	VDPU_REG_BD_REF_PIC_PRED_TAP_6_M1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_6_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_6_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_6_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_6_3,
+	VDPU_REG_BD_REF_PIC_PRED_TAP_6_4,
+	VDPU_REG_PRED_FLT_NONE_8,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_7_0,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_7_1,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_7_2,
+	VDPU_REG_PRED_FLT_PRED_BC_TAP_7_3,
+	VDPU_REG_PRED_FLT_NONE_9,
+	VDPU_REG_VP8_ADDR_REF0,
+	VDPU_REG_VP8_ADDR_REF2_5_0,
+	VDPU_REG_VP8_GREF_SIGN_BIAS_0,
+	VDPU_REG_VP8_ADDR_REF2_5_1,
+	VDPU_REG_VP8_AREF_SIGN_BIAS_1,
+	VDPU_REG_ADDR_QTABLE,
+	VDPU_REG_FWD_PIC1_SEGMENT_BASE,
+	VDPU_REG_FWD_PIC1_SEGMENT_E,
+	VDPU_REG_FWD_PIC1_SEGMENT_UPD_E,
+	VDPU_REG_ADDR_DST,
+	VDPU_REG_INTERRUPT_DEC_IRQ,
+	VDPU_REG_INTERRUPT_DEC_IRQ_DIS,
+	VDPU_REG_BEFORE_ENABLE,
+	VDPU_REG_INTERRUPT_DEC_E,
+	VDPU_REG_LAST,
+};
+
+/* {register_base, mask, bit_offset } */
+u32 rk3229_vp8d_regs_table[][3] = {
+	{ 0, 0, 0 },
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_REF_BUF_CTRL2_REFBU2_PICID */ 0x1f,
+		25
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_REF_BUF_CTRL2_REFBU2_THR */ 0xfff,
+		13
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_CONFIG_TILED_MODE_LSB */ 0x01,
+		12
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_CONFIG_DEC_ADV_PRE_DIS */ 0x01,
+		11
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_CONFIG_DEC_SCMD_DIS */ 0x01,
+		10
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_DEC_CTRL0_SKIP_MODE */ 0x01,
+		9
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_DEC_CTRL0_FILTERING_DIS */ 0x01,
+		8
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0 */ 0x0c8,
+		/* VDPU_REG_DEC_CTRL0_PIC_FIXED_QUANT */ 0x01,
+		7
+	},
+	{
+		/* VDPU_REG_STREAM_LEN */ 0x0cc,
+		/* VDPU_REG_DEC_CTRL3_INIT_QP */ 0x3f,
+		25
+	},
+	{
+		/* VDPU_REG_STREAM_LEN */ 0x0cc,
+		/* VDPU_REG_DEC_STREAM_LEN_HI */ 0x01,
+		24
+	},
+	{
+		/* VDPU_REG_STREAM_LEN */ 0x0cc,
+		/* VDPU_REG_DEC_CTRL3_STREAM_LEN */ 0xffffff,
+		0
+	},
+	{
+		/* VDPU_REG_DEC_FORMAT */ 0x0d4,
+		/* VDPU_REG_DEC_CTRL0_DEC_MODE */ 0x0f,
+		0
+	},
+	{
+		/* VDPU_REG_DATA_ENDIAN */ 0x0d8,
+		/* VDPU_REG_CONFIG_DEC_STRENDIAN_E */ 0x01,
+		5
+	},
+	{
+		/* VDPU_REG_DATA_ENDIAN */ 0x0d8,
+		/* VDPU_REG_CONFIG_DEC_STRSWAP32_E */ 0x01,
+		4
+	},
+	{
+		/* VDPU_REG_DATA_ENDIAN */ 0x0d8,
+		/* VDPU_REG_CONFIG_DEC_OUTSWAP32_E */ 0x01,
+		3
+	},
+	{
+		/* VDPU_REG_DATA_ENDIAN */ 0x0d8,
+		/* VDPU_REG_CONFIG_DEC_INSWAP32_E */ 0x01,
+		2
+	},
+	{
+		/* VDPU_REG_DATA_ENDIAN */ 0x0d8,
+		/* VDPU_REG_CONFIG_DEC_OUT_ENDIAN */ 0x01,
+		1
+	},
+	{
+		/* VDPU_REG_DATA_ENDIAN */ 0x0d8,
+		/* VDPU_REG_CONFIG_DEC_IN_ENDIAN */ 0x01,
+		0
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_TIMEOUT */ 0x01,
+		13
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_ERROR_INT */ 0x01,
+		12
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_PIC_INF */ 0x01,
+		10
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_SLICE_INT */ 0x01,
+		9
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_ASO_INT */ 0x01,
+		8
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_BUFFER_INT */ 0x01,
+		6
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_BUS_INT */ 0x01,
+		5
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_RDY_INT */ 0x01,
+		4
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_IRQ_DIS */ 0x01,
+		1
+	},
+	{
+		/* VDPU_REG_INTERRUPT */ 0x0dc,
+		/* VDPU_REG_INTERRUPT_DEC_IRQ */ 0x01,
+		0
+	},
+	{
+		/* VDPU_REG_AXI_CTRL */ 0x0e0,
+		/* VDPU_REG_AXI_DEC_SEL */ 0x01,
+		23
+	},
+	{
+		/* VDPU_REG_AXI_CTRL */ 0x0e0,
+		/* VDPU_REG_CONFIG_DEC_DATA_DISC_E */ 0x01,
+		22
+	},
+	{
+		/* VDPU_REG_AXI_CTRL */ 0x0e0,
+		/* VDPU_REG_PARAL_BUS_E */ 0x01,
+		21
+	},
+	{
+		/* VDPU_REG_AXI_CTRL */ 0x0e0,
+		/* VDPU_REG_CONFIG_DEC_MAX_BURST */ 0x1f,
+		16
+	},
+	{
+		/* VDPU_REG_AXI_CTRL */ 0x0e0,
+		/* VDPU_REG_DEC_CTRL0_DEC_AXI_WR_ID */ 0xff,
+		8
+	},
+	{
+		/* VDPU_REG_AXI_CTRL */ 0x0e0,
+		/* VDPU_REG_CONFIG_DEC_AXI_RD_ID */ 0xff,
+		0
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_AHB_HLOCK_E */ 0x01,
+		31
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_CACHE_E */ 0x01,
+		29
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_PREFETCH_SINGLE_CHANNEL_E */ 0x01,
+		28
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_INTRA_3_CYCLE_ENHANCE */ 0x01,
+		27
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_INTRA_DOUBLE_SPEED */ 0x01,
+		26
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_INTER_DOUBLE_SPEED */ 0x01,
+		25
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL3_START_CODE_E */ 0x01,
+		22
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL3_CH_8PIX_ILEAV_E */ 0x01,
+		21
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_RLC_MODE_E */ 0x01,
+		20
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_DIVX3_E */ 0x01,
+		19
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_PJPEG_E */ 0x01,
+		18
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_PIC_INTERLACE_E */ 0x01,
+		17
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_PIC_FIELDMODE_E */ 0x01,
+		16
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_PIC_B_E */ 0x01,
+		15
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_PIC_INTER_E */ 0x01,
+		14
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_PIC_TOPFIELD_E */ 0x01,
+		13
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_FWD_INTERLACE_E */ 0x01,
+		12
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_SORENSON_E */ 0x01,
+		11
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_WRITE_MVS_E */ 0x01,
+		10
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_REF_TOPFIELD_E */ 0x01,
+		9
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_REFTOPFIRST_E */ 0x01,
+		8
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_SEQ_MBAFF_E */ 0x01,
+		7
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_PICORD_COUNT_E */ 0x01,
+		6
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_CONFIG_DEC_TIMEOUT_E */ 0x01,
+		5
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_CONFIG_DEC_CLK_GATE_E */ 0x01,
+		4
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_DEC_CTRL0_DEC_OUT_DIS */ 0x01,
+		2
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_REF_BUF_CTRL2_REFBU2_BUF_E */ 0x01,
+		1
+	},
+	{
+		/* VDPU_REG_EN_FLAGS */ 0x0e4,
+		/* VDPU_REG_INTERRUPT_DEC_E */ 0x01,
+		0
+	},
+	{
+		/* VDPU_REG_PRED_FLT */ 0x0ec,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_0 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT */ 0x0ec,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_1 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT */ 0x0ec,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_2 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_ADDR_QTABLE */ 0x0f4,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_ADDR_DST */ 0x0fc,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_ADDR_STR */ 0x100,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_PIC_MB_SIZE */ 0x1e0,
+		/* VDPU_REG_DEC_PIC_MB_WIDTH */ 0x1ff,
+		23
+	},
+	{
+		/* VDPU_REG_VP8_PIC_MB_SIZE */ 0x1e0,
+		/* VDPU_REG_DEC_MB_WIDTH_OFF */ 0x0f,
+		19
+	},
+	{
+		/* VDPU_REG_VP8_PIC_MB_SIZE */ 0x1e0,
+		/* VDPU_REG_DEC_PIC_MB_HEIGHT_P */ 0xff,
+		11
+	},
+	{
+		/* VDPU_REG_VP8_PIC_MB_SIZE */ 0x1e0,
+		/* VDPU_REG_DEC_MB_HEIGHT_OFF */ 0x0f,
+		7
+	},
+	{
+		/* VDPU_REG_VP8_PIC_MB_SIZE */ 0x1e0,
+		/* VDPU_REG_DEC_CTRL1_PIC_MB_W_EXT */ 0x07,
+		3
+	},
+	{
+		/* VDPU_REG_VP8_PIC_MB_SIZE */ 0x1e0,
+		/* VDPU_REG_DEC_CTRL1_PIC_MB_H_EXT */ 0x07,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT */ 0x1e4,
+		/* VDPU_REG_DEC_CTRL4_DCT1_START_BIT */ 0x3f,
+		26
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT */ 0x1e4,
+		/* VDPU_REG_DEC_CTRL4_DCT2_START_BIT */ 0x3f,
+		20
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT */ 0x1e4,
+		/* VDPU_REG_DEC_CTRL4_VC1_HEIGHT_EXT */ 0x01,
+		13
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT */ 0x1e4,
+		/* VDPU_REG_DEC_CTRL4_BILIN_MC_E */ 0x01,
+		12
+	},
+	{
+		/* VDPU_REG_VP8_CTRL0 */ 0x1e8,
+		/* VDPU_REG_DEC_CTRL2_STRM_START_BIT */ 0x3f,
+		26
+	},
+	{
+		/* VDPU_REG_VP8_CTRL0 */ 0x1e8,
+		/* VDPU_REG_DEC_CTRL2_STRM1_START_BIT */ 0x3f,
+		18
+	},
+	{
+		/* VDPU_REG_VP8_CTRL0 */ 0x1e8,
+		/* VDPU_REG_DEC_CTRL2_BOOLEAN_VALUE */ 0xff,
+		8
+	},
+	{
+		/* VDPU_REG_VP8_CTRL0 */ 0x1e8,
+		/* VDPU_REG_DEC_CTRL2_BOOLEAN_RANGE */ 0xff,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_DATA_VAL */ 0x1f0,
+		/* VDPU_REG_DEC_CTRL6_COEFFS_PART_AM */ 0x0f,
+		24
+	},
+	{
+		/* VDPU_REG_VP8_DATA_VAL */ 0x1f0,
+		/* VDPU_REG_DEC_CTRL6_STREAM1_LEN */ 0xffffff,
+		0
+	},
+	{
+		/* VDPU_REG_PRED_FLT7 */ 0x1f4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_1 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT7 */ 0x1f4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_2 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT7 */ 0x1f4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_3 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT8 */ 0x1f8,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_0 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT8 */ 0x1f8,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_1 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT8 */ 0x1f8,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_2 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT9 */ 0x1fc,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_3 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT9 */ 0x1fc,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_0 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT9 */ 0x1fc,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_1 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_2 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_3 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_2_M1 */ 0x03,
+		10
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_2_4 */ 0x03,
+		8
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_4_M1 */ 0x03,
+		6
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_4_4 */ 0x03,
+		4
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_6_M1 */ 0x03,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT10 */ 0x200,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_6_4 */ 0x03,
+		0
+	},
+	{
+		/* VDPU_REG_FILTER_LEVEL */ 0x204,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_0 */ 0x3f,
+		18
+	},
+	{
+		/* VDPU_REG_FILTER_LEVEL */ 0x204,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_1 */ 0x3f,
+		12
+	},
+	{
+		/* VDPU_REG_FILTER_LEVEL */ 0x204,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_2 */ 0x3f,
+		6
+	},
+	{
+		/* VDPU_REG_FILTER_LEVEL */ 0x204,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_3 */ 0x3f,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER0 */ 0x208,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_0 */ 0x1f,
+		27
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER0 */ 0x208,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_1 */ 0x1f,
+		22
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER0 */ 0x208,
+		/* VDPU_REG_REF_PIC_QUANT_0 */ 0x7ff,
+		11
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER0 */ 0x208,
+		/* VDPU_REG_REF_PIC_QUANT_1 */ 0x7ff,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_ADDR_REF0 */ 0x20c,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_FILTER_MB_ADJ */ 0x210,
+		/* VDPU_REG_REF_PIC_FILT_TYPE_E */ 0x01,
+		31
+	},
+	{
+		/* VDPU_REG_FILTER_MB_ADJ */ 0x210,
+		/* VDPU_REG_REF_PIC_FILT_SHARPNESS */ 0x07,
+		28
+	},
+	{
+		/* VDPU_REG_FILTER_MB_ADJ */ 0x210,
+		/* VDPU_REG_FILT_MB_ADJ_0 */ 0x7f,
+		21
+	},
+	{
+		/* VDPU_REG_FILTER_MB_ADJ */ 0x210,
+		/* VDPU_REG_FILT_MB_ADJ_1 */ 0x7f,
+		14
+	},
+	{
+		/* VDPU_REG_FILTER_MB_ADJ */ 0x210,
+		/* VDPU_REG_FILT_MB_ADJ_2 */ 0x7f,
+		7
+	},
+	{
+		/* VDPU_REG_FILTER_MB_ADJ */ 0x210,
+		/* VDPU_REG_FILT_MB_ADJ_3 */ 0x7f,
+		0
+	},
+	{
+		/* VDPU_REG_FILTER_REF_ADJ */ 0x214,
+		/* VDPU_REG_REF_PIC_ADJ_0 */ 0x7f,
+		21
+	},
+	{
+		/* VDPU_REG_FILTER_REF_ADJ */ 0x214,
+		/* VDPU_REG_REF_PIC_ADJ_1 */ 0x7f,
+		14
+	},
+	{
+		/* VDPU_REG_FILTER_REF_ADJ */ 0x214,
+		/* VDPU_REG_REF_PIC_ADJ_2 */ 0x7f,
+		7
+	},
+	{
+		/* VDPU_REG_FILTER_REF_ADJ */ 0x214,
+		/* VDPU_REG_REF_PIC_ADJ_3 */ 0x7f,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_ADDR_REF2_5(2) */ 0x220,
+		/* VDPU_REG_VP8_ADDR_REF2_5_2 */ 0xffffffff,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_ADDR_REF2_5(2) */ 0x220,
+		/* VDPU_REG_VP8_GREF_SIGN_BIAS_2 */ 0x01, 0},
+	{
+		/* VDPU_REG_VP8_ADDR_REF2_5(2) */ 0x220,
+		/* VDPU_REG_VP8_AREF_SIGN_BIAS_2 */ 0x01, 0},
+	{
+		/* VDPU_REG_VP8_ADDR_REF2_5(3) */ 0x224,
+		/* VDPU_REG_VP8_ADDR_REF2_5_3 */ 0xffffffff,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_ADDR_REF2_5(3) */ 0x224,
+		/* VDPU_REG_VP8_GREF_SIGN_BIAS_3 */ 0x01, 0},
+	{
+		/* VDPU_REG_VP8_ADDR_REF2_5(3) */ 0x224,
+		/* VDPU_REG_VP8_AREF_SIGN_BIAS_3 */ 0x01, 0},
+	{
+		/* VDPU_REG_VP8_DCT_BASE0 */ 0x230,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE1 */ 0x234,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE2 */ 0x238,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE3 */ 0x23C,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE4 */ 0x240,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_ADDR_CTRL_PART */ 0x244,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE6 */ 0x248,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_ADDR_REF1 */ 0x250,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_SEGMENT_VAL */ 0x254,
+		/* VDPU_REG_FWD_PIC1_SEGMENT_BASE */ 0xffffffff,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_SEGMENT_VAL */ 0x254,
+		/* VDPU_REG_FWD_PIC1_SEGMENT_UPD_E */ 0x01,
+		1
+	},
+	{
+		/* VDPU_REG_VP8_SEGMENT_VAL */ 0x254,
+		/* VDPU_REG_FWD_PIC1_SEGMENT_E */ 0x01,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT2 */ 0x258,
+		/* VDPU_REG_DEC_CTRL7_DCT3_START_BIT */ 0x3f,
+		24
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT2 */ 0x258,
+		/* VDPU_REG_DEC_CTRL7_DCT4_START_BIT */ 0x3f,
+		18
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT2 */ 0x258,
+		/* VDPU_REG_DEC_CTRL7_DCT5_START_BIT */ 0x3f,
+		12
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT2 */ 0x258,
+		/* VDPU_REG_DEC_CTRL7_DCT6_START_BIT */ 0x3f,
+		6
+	},
+	{
+		/* VDPU_REG_VP8_DCT_START_BIT2 */ 0x258,
+		/* VDPU_REG_DEC_CTRL7_DCT7_START_BIT */ 0x3f,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER1 */ 0x25c,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_2 */ 0x1f,
+		27
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER1 */ 0x25c,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_3 */ 0x1f,
+		22
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER1 */ 0x25c,
+		/* VDPU_REG_REF_PIC_QUANT_2 */ 0x7ff,
+		11
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER1 */ 0x25c,
+		/* VDPU_REG_REF_PIC_QUANT_3 */ 0x7ff,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER2 */ 0x260,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_4 */ 0x1f,
+		27
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER2 */ 0x260,
+		/* VDPU_REG_REF_PIC_QUANT_4 */ 0x7ff,
+		11
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER2 */ 0x260,
+		/* VDPU_REG_REF_PIC_QUANT_5 */ 0x7ff,
+		0
+	},
+	{
+		/* VDPU_REG_PRED_FLT1 */ 0x264,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_3 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT1 */ 0x264,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_0 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT1 */ 0x264,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_1 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT2 */ 0x268,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_2 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT2 */ 0x268,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_3 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT2 */ 0x268,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_0 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT3 */ 0x26c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_1 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT3 */ 0x26c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_2 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT3 */ 0x26c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_3 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT4 */ 0x270,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_0 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT4 */ 0x270,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_1 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT4 */ 0x270,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_2 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT5 */ 0x274,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_3 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT5 */ 0x274,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_0 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT5 */ 0x274,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_1 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_PRED_FLT6 */ 0x278,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_2 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT6 */ 0x278,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_3 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT6 */ 0x278,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_0 */ 0x3ff,
+		2
+	},
+	{ 0, 0, 0 },
+};
+
+u32 rk3288_vp8d_regs_table[][3] = {
+	{ 0, 0, 0 },
+	{
+		/* VDPU_REG_INTERRUPT	*/ 0x004,
+		/* VDPU_REG_INTERRUPT_DEC_IRQ */ 0x01,
+		8
+	},
+	{
+		/* VDPU_REG_INTERRUPT	*/ 0x004,
+		/* VDPU_REG_INTERRUPT_DEC_IRQ_DIS */ 0x01,
+		4
+	},
+	{
+		/* VDPU_REG_INTERRUPT	*/ 0x004,
+		/* VDPU_REG_INTERRUPT_DEC_E */ 0x01,
+		0
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_TIMEOUT_E */ 0x01,
+		23
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_STRSWAP32_E */ 0x01,
+		22
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_STRENDIAN_E */ 0x01,
+		21
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_INSWAP32_E */ 0x01,
+		20
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_OUTSWAP32_E */ 0x01,
+		19
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_CLK_GATE_E */ 0x01,
+		10
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_IN_ENDIAN */ 0x01,
+		9
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_OUT_ENDIAN */ 0x01,
+		8
+	},
+	{
+		/* VDPU_REG_CONFIG	*/ 0x008,
+		/* VDPU_REG_CONFIG_DEC_MAX_BURST */ 0x1f,
+		0
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0	*/ 0x00c,
+		/* VDPU_REG_DEC_CTRL0_DEC_MODE */ 0x0f,
+		28
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0	*/ 0x00c,
+		/* VDPU_REG_DEC_CTRL0_SKIP_MODE */ 0x01,
+		26
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0	*/ 0x00c,
+		/* VDPU_REG_DEC_CTRL0_PIC_INTER_E */ 0x01,
+		20
+	},
+	{
+		/* VDPU_REG_DEC_CTRL0	*/ 0x00c,
+		/* VDPU_REG_DEC_CTRL0_FILTERING_DIS */ 0x01,
+		14
+	},
+	{
+		/* VDPU_REG_DEC_CTRL1	*/ 0x010,
+		/* VDPU_REG_DEC_PIC_MB_WIDTH */ 0x1ff,
+		23
+	},
+	{
+		/* VDPU_REG_DEC_CTRL1	*/ 0x010,
+		/* VDPU_REG_DEC_PIC_MB_HEIGHT_P */ 0xff,
+		11
+	},
+	{
+		/* VDPU_REG_DEC_CTRL1	*/ 0x010,
+		/* VDPU_REG_DEC_CTRL1_PIC_MB_W_EXT */ 0x07,
+		3
+	},
+	{
+		/* VDPU_REG_DEC_CTRL1	*/ 0x010,
+		/* VDPU_REG_DEC_CTRL1_PIC_MB_H_EXT */ 0x07,
+		0
+	},
+	{
+		/* VDPU_REG_DEC_CTRL2	*/ 0x014,
+		/* VDPU_REG_DEC_CTRL2_STRM_START_BIT */ 0x3f,
+		26
+	},
+	{
+		/* VDPU_REG_DEC_CTRL2	*/ 0x014,
+		/* VDPU_REG_DEC_CTRL2_STRM1_START_BIT */ 0x3f,
+		18
+	},
+	{
+		/* VDPU_REG_DEC_CTRL2	*/ 0x014,
+		/* VDPU_REG_DEC_CTRL2_BOOLEAN_VALUE */ 0xff,
+		8
+	},
+	{
+		/* VDPU_REG_DEC_CTRL2	*/ 0x014,
+		/* VDPU_REG_DEC_CTRL2_BOOLEAN_RANGE */ 0xff,
+		0
+	},
+	{
+		/* VDPU_REG_DEC_CTRL3	*/ 0x018,
+		/* VDPU_REG_DEC_CTRL3_STREAM_LEN */ 0xffffff,
+		0
+	},
+	{
+		/* VDPU_REG_DEC_CTRL4	*/ 0x01c,
+		/* VDPU_REG_DEC_CTRL4_DCT1_START_BIT */ 0x3f,
+		26
+	},
+	{
+		/* VDPU_REG_DEC_CTRL4	*/ 0x01c,
+		/* VDPU_REG_DEC_CTRL4_DCT2_START_BIT */ 0x3f,
+		20
+	},
+	{
+		/* VDPU_REG_DEC_CTRL4	*/ 0x01c,
+		/* VDPU_REG_DEC_CTRL4_VC1_HEIGHT_EXT */ 0x01,
+		13
+	},
+	{
+		/* VDPU_REG_DEC_CTRL4	*/ 0x01c,
+		/* VDPU_REG_DEC_CTRL4_BILIN_MC_E */ 0x01,
+		12
+	},
+	{
+		/* VDPU_REG_DEC_CTRL7	*/ 0x02c,
+		/* VDPU_REG_DEC_CTRL7_DCT3_START_BIT */ 0x3f,
+		24
+	},
+	{
+		/* VDPU_REG_DEC_CTRL7	*/ 0x02c,
+		/* VDPU_REG_DEC_CTRL7_DCT4_START_BIT */ 0x3f,
+		18
+	},
+	{
+		/* VDPU_REG_DEC_CTRL7	*/ 0x02c,
+		/* VDPU_REG_DEC_CTRL7_DCT5_START_BIT */ 0x3f,
+		12
+	},
+	{
+		/* VDPU_REG_DEC_CTRL7	*/ 0x02c,
+		/* VDPU_REG_DEC_CTRL7_DCT6_START_BIT */ 0x3f,
+		6
+	},
+	{
+		/* VDPU_REG_DEC_CTRL7	*/ 0x02c,
+		/* VDPU_REG_DEC_CTRL7_DCT7_START_BIT */ 0x3f,
+		0
+	},
+	{
+		/* VDPU_REG_ADDR_STR	*/ 0x030,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_ADDR_DST	*/ 0x034,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_ADDR_REF(0) */ 0x038,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_ADDR_REF(4) */ 0x048,
+		/* VDPU_REG_VP8_ADDR_REF2_5_2 */ 0xffffffff,
+		0
+	},
+	{
+		/* VDPU_REG_ADDR_REF(4) */ 0x048,
+		/* VDPU_REG_VP8_GREF_SIGN_BIAS_2 */ 0x01, 1},
+	{
+		/* VDPU_REG_ADDR_REF(4) */ 0x048,
+		/* VDPU_REG_VP8_AREF_SIGN_BIAS_2 */ 0x01, 0},
+	{
+		/* VDPU_REG_ADDR_REF(5) */ 0x04c,
+		/* VDPU_REG_VP8_ADDR_REF2_5_3 */ 0xffffffff,
+		0
+	},
+	{
+		/* VDPU_REG_ADDR_REF(5) */ 0x04c,
+		/* VDPU_REG_VP8_GREF_SIGN_BIAS_3 */ 0x01, 1},
+	{
+		/* VDPU_REG_ADDR_REF(5) */ 0x04c,
+		/* VDPU_REG_VP8_AREF_SIGN_BIAS_3 */ 0x01, 0},
+	{
+		/* VDPU_REG_VP8_DCT_BASE0 */ 0x058,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE1 */ 0x05c,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE2 */ 0x060,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE3 */ 0x064,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE4 */ 0x068,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_ADDR_CTRL_PART */ 0x06c,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_VP8_DCT_BASE6 */ 0x070,
+		0xffffffff, 0
+	},
+	{
+		/* VDPU_REG_REF_PIC(2) */ 0x080,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_0 */ 0x3f,
+		18
+	},
+	{
+		/* VDPU_REG_REF_PIC(2) */ 0x080,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_1 */ 0x3f,
+		12
+	},
+	{
+		/* VDPU_REG_REF_PIC(2) */ 0x080,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_2 */ 0x3f,
+		6
+	},
+	{
+		/* VDPU_REG_REF_PIC(2) */ 0x080,
+		/* VDPU_REG_REF_PIC_LF_LEVEL_3 */ 0x3f,
+		0
+	},
+	{
+		/* VDPU_REG_REF_PIC(0) */ 0x078,
+		/* VDPU_REG_REF_PIC_FILT_TYPE_E */ 0x01,
+		31
+	},
+	{
+		/* VDPU_REG_REF_PIC(0) */ 0x078,
+		/* VDPU_REG_REF_PIC_FILT_SHARPNESS */ 0x07,
+		28
+	},
+	{
+		/* VDPU_REG_REF_PIC(0) */ 0x078,
+		/* VDPU_REG_FILT_MB_ADJ_0 */ 0x7f,
+		21
+	},
+	{
+		/* VDPU_REG_REF_PIC(0) */ 0x078,
+		/* VDPU_REG_FILT_MB_ADJ_1 */ 0x7f,
+		14
+	},
+	{
+		/* VDPU_REG_REF_PIC(0) */ 0x078,
+		/* VDPU_REG_FILT_MB_ADJ_2 */ 0x7f,
+		7
+	},
+	{
+		/* VDPU_REG_REF_PIC(0) */ 0x078,
+		/* VDPU_REG_FILT_MB_ADJ_3 */ 0x7f,
+		0
+	},
+	{
+		/* VDPU_REG_REF_PIC(1) */ 0x07c,
+		/* VDPU_REG_REF_PIC_ADJ_0 */ 0x7f,
+		21
+	},
+	{
+		/* VDPU_REG_REF_PIC(1) */ 0x07c,
+		/* VDPU_REG_REF_PIC_ADJ_1 */ 0x7f,
+		14
+	},
+	{
+		/* VDPU_REG_REF_PIC(1) */ 0x07c,
+		/* VDPU_REG_REF_PIC_ADJ_2 */ 0x7f,
+		7
+	},
+	{
+		/* VDPU_REG_REF_PIC(1) */ 0x07c,
+		/* VDPU_REG_REF_PIC_ADJ_3 */ 0x7f,
+		0
+	},
+	{
+		/* VDPU_REG_REF_PIC(3) */ 0x084,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_0 */ 0x1f,
+		27
+	},
+	{
+		/* VDPU_REG_REF_PIC(3) */ 0x084,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_1 */ 0x1f,
+		22
+	},
+	{
+		/* VDPU_REG_REF_PIC(3) */ 0x084,
+		/* VDPU_REG_REF_PIC_QUANT_0 */ 0x7ff,
+		11
+	},
+	{
+		/* VDPU_REG_REF_PIC(3) */ 0x084,
+		/* VDPU_REG_REF_PIC_QUANT_1 */ 0x7ff,
+		0
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(4) */ 0x0b8,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_2 */ 0x1f,
+		27
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(4) */ 0x0b8,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_3 */ 0x1f,
+		22
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(4) */ 0x0b8,
+		/* VDPU_REG_REF_PIC_QUANT_2 */ 0x7ff,
+		11
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(4) */ 0x0b8,
+		/* VDPU_REG_REF_PIC_QUANT_3 */ 0x7ff,
+		0
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER2 */ 0x0bc,
+		/* VDPU_REG_REF_PIC_QUANT_DELTA_4 */ 0x1f,
+		27
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER2 */ 0x0bc,
+		/* VDPU_REG_REF_PIC_QUANT_4 */ 0x7ff,
+		11
+	},
+	{
+		/* VDPU_REG_VP8_QUANTER2 */ 0x0bc,
+		/* VDPU_REG_REF_PIC_QUANT_5 */ 0x7ff,
+		0
+	},
+	{
+		/* VDPU_REG_FWD_PIC(0) */ 0x028,
+		/* VDPU_REG_FWD_PIC1_SEGMENT_BASE */ 0xffffffff,
+		0
+	},
+	{
+		/* VDPU_REG_FWD_PIC(0) */ 0x028,
+		/* VDPU_REG_FWD_PIC1_SEGMENT_UPD_E */ 0x01,
+		1
+	},
+	{
+		/* VDPU_REG_FWD_PIC(0) */ 0x028,
+		/* VDPU_REG_FWD_PIC1_SEGMENT_E */ 0x01,
+		0
+	},
+	{
+		/* VDPU_REG_PRED_FLT */ 0x0c4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_0 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_PRED_FLT */ 0x0c4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_1 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_PRED_FLT */ 0x0c4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_2 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_REF_PIC(4) */ 0x088,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_0_3 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_REF_PIC(4) */ 0x088,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_0 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_REF_PIC(4) */ 0x088,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_1 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_REF_PIC(5) */ 0x08c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_2 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_REF_PIC(5) */ 0x08c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_1_3 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_REF_PIC(5) */ 0x08c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_0 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_REF_PIC(6) */ 0x090,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_1 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_REF_PIC(6) */ 0x090,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_2 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_REF_PIC(6) */ 0x090,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_2_3 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_REF_PIC(7) */ 0x094,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_0 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_REF_PIC(7) */ 0x094,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_1 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_REF_PIC(7) */ 0x094,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_2 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_REF_PIC(8) */ 0x098,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_3_3 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_REF_PIC(8) */ 0x098,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_0 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_REF_PIC(8) */ 0x098,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_1 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_REF_PIC(9) */ 0x09c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_2 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_REF_PIC(9) */ 0x09c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_4_3 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_REF_PIC(9) */ 0x09c,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_0 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(0) */ 0x0a8,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_1 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(0) */ 0x0a8,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_2 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(0) */ 0x0a8,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_5_3 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(1) */ 0x0ac,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_0 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(1) */ 0x0ac,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_1 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(1) */ 0x0ac,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_2 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(2) */ 0x0b0,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_6_3 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(2) */ 0x0b0,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_0 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(2) */ 0x0b0,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_1 */ 0x3ff,
+		2
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_2 */ 0x3ff,
+		22
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_PRED_FLT_PRED_BC_TAP_7_3 */ 0x3ff,
+		12
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_2_M1 */ 0x03,
+		10
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_2_4 */ 0x03,
+		8
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_4_M1 */ 0x03,
+		6
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_4_4 */ 0x03,
+		4
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_6_M1 */ 0x03,
+		2
+	},
+	{
+		/* VDPU_REG_BD_REF_PIC(3) */ 0x0b4,
+		/* VDPU_REG_BD_REF_PIC_PRED_TAP_6_4 */ 0x03,
+		0
+	},
+	{
+		/* VDPU_REG_DEC_CTRL6 */ 0x024,
+		/* VDPU_REG_DEC_CTRL6_STREAM1_LEN */ 0xffffff,
+		0
+	},
+	{
+		/* VDPU_REG_DEC_CTRL6 */ 0x024,
+		/* VDPU_REG_DEC_CTRL6_COEFFS_PART_AM */ 0x0f,
+		24
+	},
+	{
+		/* VDPU_REG_ADDR_QTABLE */ 0x0a0,
+		0xffffffff, 0
+	},
+	{ 0, 0, 0 },
+};
+
+u32 rk3229_regs_map[VDPU_REG_LAST + 1] = {
+	58, 59, 49, 13, 16, 14, 15, 18,
+	17, 32, 12, 6, 7, 69, 71, 73,
+	74, 82, 81, 77, 78, 102, 103, 104,
+	105, 112, 111, 113, 114, 115, 116, 117,
+	118, 119, 120, 108, 109, 145, 146, 106,
+	107, 143, 144, 147, 132, 80, 84, 83,
+	11, 68, 127, 128, 129, 130, 131, 132,
+	133, 79, 75, 76, 138, 139, 140, 141,
+	142, 0, 63, 64, 65, 150, 0, 0,
+	151, 152, 153, 154, 0, 96, 155, 156,
+	157, 158, 97, 0, 159, 160, 161, 162,
+	0, 98, 163, 164, 165, 166, 99, 0,
+	167, 85, 86, 87, 0, 100, 88, 89,
+	90, 91, 101, 0, 92, 93, 94, 95,
+	0, 110, 121, 122, 124, 126, 66, 135,
+	137, 136, 67, 28, 27, 0, 62, 0,
+};
+
+u32 rk3288_regs_map[VDPU_REG_LAST + 1] = {
+	4, 9, 15, 6, 7, 5, 8, 10,
+	11, 12, 13, 14, 16, 17, 18, 19,
+	20, 24, 23, 28, 29, 51, 52, 53,
+	54, 56, 55, 57, 58, 59, 60, 61,
+	62, 63, 64, 67, 68, 71, 72, 65,
+	66, 69, 70, 73, 49, 22, 117, 118,
+	25, 35, 44, 45, 46, 47, 48, 49,
+	50, 21, 26, 27, 30, 31, 32, 33,
+	34, 0, 79, 80, 81, 82, 0, 0,
+	83, 84, 85, 86, 0, 111, 87, 88,
+	89, 90, 112, 0, 91, 92, 93, 94,
+	0, 113, 95, 96, 97, 98, 114, 0,
+	99, 100, 101, 102, 0, 115, 103, 104,
+	105, 106, 116, 0, 107, 108, 109, 110,
+	0, 37, 38, 39, 41, 43, 119, 76,
+	78, 77, 36, 1, 2, 0, 3, 0,
+};
+
+#endif
