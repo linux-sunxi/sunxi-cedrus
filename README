@@ -1,0 +1,18 @@
+
+Sunxi-Cedrus, V4L2 memory-to-memory driver for the Video Engine (aka VPU) found in sunxi socs made by Allwinner Technology.
+
+
+Wiki main page at http://linux-sunxi.org/Cedrus
+Planing page at http://linux-sunxi.org/VE_Planning
+
+
+Status.
+
+  Under inital development, no usable form for any use.
+
+
+Branches description.
+
+  * master - The master branch is reserved for the latest stable driver, and
+             until then will be emptly.
+
