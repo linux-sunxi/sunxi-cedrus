@@ -52,6 +52,7 @@ static struct rockchip_vpu_fmt formats[] = {
 		.num_planes = 1,
 		.depth = { 12 },
 	},
+#ifdef NO_BOILERPLATE_CLEANUP
 	{
 		.name = "Frames of VP8 Decoded Stream",
 		.fourcc = V4L2_PIX_FMT_VP8_FRAME,
@@ -66,6 +67,7 @@ static struct rockchip_vpu_fmt formats[] = {
 		.codec_mode = RK3229_VPU_CODEC_VP8D,
 		.num_planes = 1,
 	},
+#endif
 };
 
 static struct rockchip_vpu_fmt *find_format(u32 fourcc, bool bitstream,
@@ -94,6 +96,7 @@ enum {
 };
 
 static struct rockchip_vpu_control controls[] = {
+#ifdef NO_BOILERPLATE_CLEANUP
 	[ROCKCHIP_VPU_DEC_CTRL_VP8_FRAME_HDR] = {
 		.id = V4L2_CID_MPEG_VIDEO_VP8_FRAME_HDR,
 		.type = V4L2_CTRL_TYPE_PRIVATE,
@@ -102,6 +105,7 @@ static struct rockchip_vpu_control controls[] = {
 		.elem_size = sizeof(struct v4l2_ctrl_vp8_frame_hdr),
 		.can_store = true,
 	},
+#endif
 };
 
 static inline const void *get_ctrl_ptr(struct rockchip_vpu_ctx *ctx,
@@ -649,9 +653,11 @@ static int rockchip_vpu_dec_s_ctrl(struct v4l2_ctrl *ctrl)
 	vpu_debug(4, "ctrl id %d\n", ctrl->id);
 
 	switch (ctrl->id) {
+#ifdef NO_BOILERPLATE_CLEANUP
 	case V4L2_CID_MPEG_VIDEO_VP8_FRAME_HDR:
 		/* These controls are used directly. */
 		break;
+#endif
 
 	default:
 		v4l2_err(&dev->v4l2_dev, "Invalid control, id=%d, val=%d\n",
@@ -961,12 +967,14 @@ static void rockchip_vpu_dec_prepare_run(struct rockchip_vpu_ctx *ctx)
 	struct vb2_v4l2_buffer *src =
 		to_vb2_v4l2_buffer(&ctx->run.src->b.vb2_buf);
 
+#ifdef NO_BOILERPLATE_CLEANUP
 	v4l2_ctrl_apply_request(&ctx->ctrl_handler, src->request);
 
 	if (ctx->vpu_src_fmt->fourcc == V4L2_PIX_FMT_VP8_FRAME) {
 		ctx->run.vp8d.frame_hdr = get_ctrl_ptr(ctx,
 				ROCKCHIP_VPU_DEC_CTRL_VP8_FRAME_HDR);
 	}
+#endif
 }
 
 static void rockchip_vpu_dec_run_done(struct rockchip_vpu_ctx *ctx,

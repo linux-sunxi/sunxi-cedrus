@@ -26,6 +26,7 @@
 #include "rockchip_vpu_hw.h"
 #include "rockchip_vp8d_regs.h"
 #include "rockchip_vpu_common.h"
+#ifdef NO_BOILERPLATE_CLEANUP
 
 #define RK_MAX_REGS_NUMS	256
 #define DEC_8190_ALIGN_MASK	0x07U
@@ -561,9 +562,11 @@ static void rockchip_vp8d_cfg_buffers(struct rockchip_vpu_ctx *ctx)
 	vp8d_write_regs_value(VDPU_REG_ADDR_DST, dma_address,
 			      "VDPU_REG_ADDR_DST");
 }
+#endif
 
 int rockchip_vpu_vp8d_init(struct rockchip_vpu_ctx *ctx)
 {
+#ifdef NO_BOILERPLATE_CLEANUP
 	struct rockchip_vpu_dev *vpu = ctx->dev;
 	unsigned int mb_width, mb_height;
 	size_t segment_map_size;
@@ -616,10 +619,14 @@ prob_table_failed:
 
 	vpu_debug_leave();
 	return ret;
+#else
+	return 0;
+#endif
 }
 
 void rockchip_vpu_vp8d_exit(struct rockchip_vpu_ctx *ctx)
 {
+#ifdef NO_BOILERPLATE_CLEANUP
 	struct rockchip_vpu_dev *vpu = ctx->dev;
 
 	vpu_debug_enter();
@@ -628,10 +635,12 @@ void rockchip_vpu_vp8d_exit(struct rockchip_vpu_ctx *ctx)
 	rockchip_vpu_aux_buf_free(vpu, &ctx->hw.vp8d.prob_tbl);
 
 	vpu_debug_leave();
+#endif
 }
 
 void rockchip_vpu_vp8d_run(struct rockchip_vpu_ctx *ctx)
 {
+#ifdef NO_BOILERPLATE_CLEANUP
 	const struct v4l2_ctrl_vp8_frame_hdr *hdr = ctx->run.vp8d.frame_hdr;
 	struct rockchip_vpu_dev *vpu = ctx->dev;
 	size_t height = ctx->dst_fmt.height;
@@ -759,10 +768,13 @@ void rockchip_vpu_vp8d_run(struct rockchip_vpu_ctx *ctx)
 	vdpu_write_relaxed(vpu, reg, RK_GET_REG_BASE(VDPU_REG_INTERRUPT_DEC_E));
 
 	vpu_debug_leave();
+#endif
 }
+
 
 int rockchip_vdpu_irq(int irq, struct rockchip_vpu_dev *vpu)
 {
+#ifdef NO_BOILERPLATE_CLEANUP
 	u32 mask;
 	u32 status = vdpu_read(vpu,
 			       RK_GET_REG_BASE(VDPU_REG_INTERRUPT_DEC_IRQ));
@@ -778,7 +790,7 @@ int rockchip_vdpu_irq(int irq, struct rockchip_vpu_dev *vpu)
 			   RK_GET_REG_BASE(VDPU_REG_CONFIG_DEC_MAX_BURST));
 		return 0;
 	}
-
+#endif
 	return -1;
 }
 
@@ -788,6 +800,7 @@ int rockchip_vdpu_irq(int irq, struct rockchip_vpu_dev *vpu)
 
 void rockchip_vpu_dec_reset(struct rockchip_vpu_ctx *ctx)
 {
+#ifdef NO_BOILERPLATE_CLEANUP
 	struct rockchip_vpu_dev *vpu = ctx->dev;
 	u32 mask;
 
@@ -795,4 +808,5 @@ void rockchip_vpu_dec_reset(struct rockchip_vpu_ctx *ctx)
 	mask = mask << RK_GET_REG_BITS_OFFSET(VDPU_REG_INTERRUPT_DEC_IRQ_DIS);
 	vdpu_write(vpu, mask, RK_GET_REG_BASE(VDPU_REG_INTERRUPT_DEC_IRQ_DIS));
 	vdpu_write(vpu, 0, RK_GET_REG_BASE(VDPU_REG_CONFIG_DEC_TIMEOUT_E));
+#endif
 }

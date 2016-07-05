@@ -184,8 +184,10 @@ void rockchip_vpu_run_done(struct rockchip_vpu_ctx *ctx,
 	struct vb2_buffer *src = &ctx->run.src->b.vb2_buf;
 	struct vb2_buffer *dst = &ctx->run.dst->b.vb2_buf;
 
+#ifdef NO_BOILERPLATE_CLEANUP
 	to_vb2_v4l2_buffer(dst)->timestamp =
 		to_vb2_v4l2_buffer(src)->timestamp;
+#endif
 	vb2_buffer_done(&ctx->run.src->b.vb2_buf, result);
 	vb2_buffer_done(&ctx->run.dst->b.vb2_buf, result);
 
@@ -253,14 +255,20 @@ int rockchip_vpu_ctrls_setup(struct rockchip_vpu_ctx *ctx,
 	for (i = 0; i < num_ctrls; i++) {
 		if (IS_VPU_PRIV(controls[i].id)
 		    || controls[i].id >= V4L2_CID_CUSTOM_BASE
+#ifdef NO_BOILERPLATE_CLEANUP
 		    || controls[i].type == V4L2_CTRL_TYPE_PRIVATE) {
+#else
+		    ) {
+#endif
 			memset(&cfg, 0, sizeof(struct v4l2_ctrl_config));
 
 			cfg.ops = ctrl_ops;
 			cfg.id = controls[i].id;
 			cfg.min = controls[i].minimum;
 			cfg.max = controls[i].maximum;
+#ifdef NO_BOILERPLATE_CLEANUP
 			cfg.max_reqs = controls[i].max_reqs;
+#endif
 			cfg.def = controls[i].default_value;
 			cfg.name = controls[i].name;
 			cfg.type = controls[i].type;
@@ -310,8 +318,10 @@ int rockchip_vpu_ctrls_setup(struct rockchip_vpu_ctx *ctx,
 			ctx->ctrls[i]->flags |= V4L2_CTRL_FLAG_VOLATILE;
 		if (controls[i].is_read_only && ctx->ctrls[i])
 			ctx->ctrls[i]->flags |= V4L2_CTRL_FLAG_READ_ONLY;
+#ifdef NO_BOILERPLATE_CLEANUP
 		if (controls[i].can_store && ctx->ctrls[i])
 			ctx->ctrls[i]->flags |= V4L2_CTRL_FLAG_REQ_KEEP;
+#endif
 	}
 
 	v4l2_ctrl_handler_setup(&ctx->ctrl_handler);
@@ -393,7 +403,9 @@ static int rockchip_vpu_open(struct file *filp)
 	q->mem_ops = &vb2_dma_contig_memops;
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 
+#ifdef NO_BOILERPLATE_CLEANUP
 	q->v4l2_allow_requests = true;
+#endif
 
 	ret = vb2_queue_init(q);
 	if (ret) {
@@ -415,7 +427,9 @@ static int rockchip_vpu_open(struct file *filp)
 	q->mem_ops = &vb2_dma_contig_memops;
 	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
 
+#ifdef NO_BOILERPLATE_CLEANUP
 	q->v4l2_allow_requests = true;
+#endif
 
 	ret = vb2_queue_init(q);
 	if (ret) {
@@ -600,11 +614,15 @@ static int rockchip_vpu_probe(struct platform_device *pdev)
 
 	vpu->variant = rockchip_get_drv_data(pdev);
 
+#ifdef NO_BOILERPLATE_CLEANUP
 	ret = rockchip_vpu_hw_probe(vpu);
 	if (ret) {
 		dev_err(&pdev->dev, "rockchip_vpu_hw_probe failed\n");
 		goto err_hw_probe;
 	}
+#else
+	dev_info(&pdev->dev, "BOILERPLATE CLEANUP");
+#endif
 
 	/*
 	 * We'll do mostly sequential access, so sacrifice TLB efficiency for
